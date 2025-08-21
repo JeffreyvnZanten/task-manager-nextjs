@@ -1,14 +1,20 @@
 import LeftHeader from "@/components/LeftHeader";
 import RightHeader from "@/components/RightHeader";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const user = await prisma.user.findUnique({
-    where: { username: "JefvnZanten" },
+  const session = await auth.api.getSession({
+    headers: await headers(),
   });
+
+  if (!session) {
+    return <div>Not authenticated</div>;
+  }
 
   return (
     <html lang="en">
@@ -18,7 +24,7 @@ export default async function RootLayout({
             <button className="bg-blue-400 px-3 rounded-xl">Add Project</button>
           </LeftHeader>
           <RightHeader>
-            <p>Hi, {user?.name}</p>
+            <p>Hi, {session.user?.name}</p>
             <button className="bg-blue-400 px-3 rounded-xl">Settings</button>
           </RightHeader>
         </div>

@@ -1,8 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import useLoginForm from "@/hooks/useLoginForm";
-import { onSubmit } from "@/app/actions";
+import { loginAction } from "@/app/loginAction";
 
 type LoginFormProps = {
   onSubmit: () => void;
@@ -13,7 +12,7 @@ export default function LoginForm() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <form className="mt-8 space-y-6" action={onSubmit}>
+      <form className="mt-8 space-y-6" action={loginAction}>
         <div className="rounded-md shadow-sm -space-y-px">
           <div>
             <label htmlFor="username" className="sr-only">

@@ -8,6 +8,13 @@
       "when": 1755759245547,
       "tag": "0000_light_thundra",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1755768314121,
+      "tag": "0001_worthless_madame_hydra",
+      "breakpoints": true
     }
   ]
 }
