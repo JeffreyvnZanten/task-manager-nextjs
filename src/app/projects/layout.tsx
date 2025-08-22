@@ -2,6 +2,17 @@ import LeftHeader from "@/components/LeftHeader";
 import RightHeader from "@/components/RightHeader";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+
+async function logoutAction() {
+  "use server";
+
+  await auth.api.signOut({
+    headers: await headers(),
+  });
+
+  redirect("/");
+}
 
 export default async function RootLayout({
   children,
@@ -25,7 +36,12 @@ export default async function RootLayout({
           </LeftHeader>
           <RightHeader>
             <p>Hi, {session.user?.name}</p>
-            <button className="bg-blue-400 px-3 rounded-xl">Settings</button>
+            <button
+              className="bg-red-800 px-4 py-1 rounded-xl"
+              onClick={logoutAction}
+            >
+              Log out
+            </button>
           </RightHeader>
         </div>
         {children}

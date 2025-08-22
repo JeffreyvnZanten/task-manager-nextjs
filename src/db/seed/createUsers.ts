@@ -23,9 +23,7 @@ function parseUsers(): Array<{
   });
 }
 
-async function seed() {
-  console.log("🌱 Starting seed process...");
-
+export async function createUsers() {
   try {
     const usersToSeed = parseUsers();
 
@@ -59,14 +57,3 @@ async function seed() {
     throw error;
   }
 }
-
-async function main() {
-  try {
-    await seed();
-  } catch (error) {
-    console.error("Main process failed:", error);
-    process.exit(1);
-  }
-}
-
-main();
