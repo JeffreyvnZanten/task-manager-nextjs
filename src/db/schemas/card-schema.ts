@@ -1,10 +1,10 @@
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
-import { user } from "./auth-schema";
+import { project } from "./project-schema";
 
-export const project = sqliteTable("project", {
+export const card = sqliteTable("card", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   title: text("title").notNull(),
-  user_id: text("user_id")
+  project_id: integer("project_id")
     .notNull()
-    .references(() => user.id),
+    .references(() => project.id),
 });

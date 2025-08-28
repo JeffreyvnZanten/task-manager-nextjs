@@ -6,8 +6,8 @@ export default function LeftHeader({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex p-4 gap-4">
-      <Link className="text-2xl" href="/projects">
+    <div className="flex p-4 gap-2 xl:gap-4">
+      <Link className="text-xl" href="/projects">
         Projects
       </Link>
       {children}

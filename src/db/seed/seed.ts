@@ -3,8 +3,8 @@ import { createUsers } from "./createUsers";
 
 async function seed() {
   console.log("🌱 Starting seed process...");
-  createUsers();
-  createDummyProjects();
+  await createUsers();
+  await createDummyProjects();
 }
 
 async function main() {

@@ -1,6 +1,7 @@
 import { project } from "@/db/schemas/project-schema";
 import { db } from "@/db";
 import { getUserId } from "@/db/userRepository";
+import { card } from "../schemas/card-schema";
 
 export function createDummyProjects() {
   createProjects("jefvnzanten@gmail.com");
@@ -9,13 +10,39 @@ export function createDummyProjects() {
 
 const projects = [
   {
-    title: "Project 1",
+    title: "Inbox",
+    cards: [
+      {
+        title: "Op bezoek bij de buren",
+      },
+      {
+        title: "Vakantie boeken Griekenland",
+      },
+    ],
   },
   {
-    title: "Project 2",
+    title: "Vandaag",
+    cards: null,
   },
   {
-    title: "Project 3",
+    title: "Inkopen",
+    cards: [
+      {
+        title: "Boodschappen",
+        tasks: [
+          {
+            title: "Koop melk",
+            completed: false,
+          },
+          {
+            title: "Koop brood",
+            completed: true,
+          },
+        ],
+        dueDate: null,
+        dueTime: null,
+      },
+    ],
   },
 ];
 
@@ -23,25 +50,31 @@ async function createProjects(username: string) {
   const userId = await getUserId(username);
 
   console.log("User ID:", userId);
-  try {
-    const result = await db.insert(project).values({
-      title: "Project 1",
-      user_id: userId,
-    });
 
-    console.log(result);
-  } catch (error: any) {
-    throw error;
-  }
+  for (const projectData of projects) {
+    try {
+      const projectResult = await db.insert(project).values({
+        title: projectData.title,
+        user_id: userId,
+      });
 
-  try {
-    const result = await db.insert(project).values({
-      title: "Project 2",
-      user_id: userId,
-    });
+      const projectId = Number(projectResult.lastInsertRowid);
+      console.log("Project ID:", projectId);
 
-    console.log(result);
-  } catch (error: any) {
-    throw error;
+      if (projectData.cards !== null) {
+        for (const cardData of projectData.cards) {
+          try {
+            const cardResult = await db.insert(card).values({
+              title: cardData.title,
+              project_id: projectId,
+            });
+          } catch (error: any) {
+            throw error;
+          }
+        }
+      }
+    } catch (error: any) {
+      throw error;
+    }
   }
 }

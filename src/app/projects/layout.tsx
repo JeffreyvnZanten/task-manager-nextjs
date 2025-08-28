@@ -1,3 +1,4 @@
+import AddButton from "@/components/AddButton";
 import LeftHeader from "@/components/LeftHeader";
 import RightHeader from "@/components/RightHeader";
 import { auth } from "@/lib/auth";
@@ -12,6 +13,12 @@ async function logoutAction() {
   });
 
   redirect("/");
+}
+
+async function createProject() {
+  "use server";
+
+  console.log("Create project");
 }
 
 export default async function RootLayout({
@@ -30,19 +37,21 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div className="flex justify-between">
-          <LeftHeader>
-            <button className="bg-blue-400 px-3 rounded-xl">Add Project</button>
-          </LeftHeader>
-          <RightHeader>
-            <p>Hi, {session.user?.name}</p>
-            <button
-              className="bg-red-800 px-4 py-1 rounded-xl"
-              onClick={logoutAction}
-            >
-              Log out
-            </button>
-          </RightHeader>
+        <div className="flex justify-center w-full h-[vh8]">
+          <div className="flex justify-between xl:w-[40%] lg:w-[60%] w-[100%] bg-black">
+            <LeftHeader>
+              <AddButton type="Project" handleOnClick={createProject} />
+            </LeftHeader>
+            <RightHeader>
+              <p className="text-sm lg:text-md">Hi, {session.user?.name}</p>
+              <button
+                className="bg-red-800 px-4 py-1 rounded-xl text-sm cursor-pointer"
+                onClick={logoutAction}
+              >
+                x
+              </button>
+            </RightHeader>
+          </div>
         </div>
         {children}
       </body>

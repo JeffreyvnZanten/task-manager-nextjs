@@ -1,12 +1,7 @@
 import { project } from "@/db/schemas/project-schema";
 import { eq } from "drizzle-orm";
 import { db } from ".";
-
-type Project = {
-  id: number;
-  title: string;
-  user_id: string;
-};
+import { Project } from "@/types";
 
 export async function getAllProjectsForUser(id: string): Promise<Project[]> {
   try {
