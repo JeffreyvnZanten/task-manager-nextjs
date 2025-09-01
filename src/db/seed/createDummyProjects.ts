@@ -67,13 +67,14 @@ async function createProjects(username: string) {
             const cardResult = await db.insert(card).values({
               title: cardData.title,
               project_id: projectId,
+              status: "todo",
             });
-          } catch (error: any) {
+          } catch (error: unknown) {
             throw error;
           }
         }
       }
-    } catch (error: any) {
+    } catch (error: unknown) {
       throw error;
     }
   }

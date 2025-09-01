@@ -4,6 +4,7 @@ import { project } from "./project-schema";
 export const card = sqliteTable("card", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   title: text("title").notNull(),
+  status: text("status").notNull(),
   project_id: integer("project_id")
     .notNull()
     .references(() => project.id),

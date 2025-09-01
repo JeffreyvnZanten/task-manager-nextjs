@@ -8,7 +8,7 @@ export default function LeftHeader({
   return (
     <div className="flex p-4 gap-2 xl:gap-4">
       <Link className="text-xl" href="/projects">
-        Projects
+        Boards
       </Link>
       {children}
     </div>

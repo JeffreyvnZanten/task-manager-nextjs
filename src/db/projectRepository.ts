@@ -15,3 +15,12 @@ export async function getAllProjectsForUser(id: string): Promise<Project[]> {
     throw error;
   }
 }
+
+export async function GetProjectById(id: number): Promise<Project | null> {
+  const result = await db
+    .select()
+    .from(project)
+    .where(eq(project.id, id))
+    .limit(1);
+  return result[0] || null;
+}
