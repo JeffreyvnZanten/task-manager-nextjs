@@ -48,7 +48,6 @@ export default async function Layout({ params, children }: LayoutProps) {
           <div className="flex justify-between xl:w-[40%] lg:w-[60%] w-[100%] bg-black">
             <LeftHeader>
               {project && <ProjectTitle title={project.title} />}
-              <AddButton type="Card" handleOnClick={createProject} />
             </LeftHeader>
             <RightHeader>
               <p className="text-sm lg:text-md">Hi, {session.user?.name}</p>
