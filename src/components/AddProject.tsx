@@ -21,13 +21,13 @@ export default function AddProject() {
           />
           <div className="flex gap-[1em]">
             <button
-              className="bg-blue-400 px-2 rounded-lg cursor-pointer w-full py-1"
+              className="bg-blue-600 px-2 rounded-lg cursor-pointer w-full py-1"
               onClick={() => {}}
             >
-              Create
+              Add
             </button>
             <button
-              className="bg-red-400 px-2 rounded-lg cursor-pointer w-full py-1"
+              className="bg-red-600 px-2 rounded-lg cursor-pointer w-full py-1"
               onClick={cancel}
             >
               Cancel
