@@ -42,8 +42,8 @@ export default async function Layout({ params, children }: LayoutProps) {
   console.log("Project in layout:", project);
 
   return (
-    <body>
-      <div className="flex justify-center w-full h-[vh8]">
+    <div>
+      <header className="flex justify-center w-full h-[8vh]">
         <div className="flex justify-between xl:w-[40%] lg:w-[60%] w-[100%] bg-black">
           <LeftHeader>
             {project && <ProjectTitle title={project.title} />}
@@ -58,8 +58,8 @@ export default async function Layout({ params, children }: LayoutProps) {
             </button>
           </RightHeader>
         </div>
-      </div>
+      </header>
       {children}
-    </body>
+    </div>
   );
 }
