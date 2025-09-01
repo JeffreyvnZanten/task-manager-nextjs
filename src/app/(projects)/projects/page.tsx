@@ -1,4 +1,5 @@
 import AddButton from "@/components/AddButton";
+import AddProject from "@/components/AddProject";
 import ProjectCard from "@/components/ProjectCard";
 import { getAllProjectsForUser } from "@/db/projectRepository";
 import { getUserId } from "@/db/userRepository";
@@ -36,7 +37,7 @@ export default async function Home() {
         grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
         gap-[1em] 2xl:gap-[2em] xl:gap-[2em] lg:gap-[2em] md:gap-[2em] items-center"
         >
-          <AddButton type="Project" handleOnClick={createProject} />
+          <AddProject />
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}

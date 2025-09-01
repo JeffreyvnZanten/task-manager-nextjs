@@ -36,24 +36,22 @@ export default async function Layout({ children }: LayoutProps) {
   }
 
   return (
-    <html lang="en">
-      <body>
-        <div className="flex justify-center w-full h-[vh8]">
-          <div className="flex justify-between xl:w-[40%] lg:w-[60%] w-[100%] bg-black">
-            <LeftHeader>&nbsp;</LeftHeader>
-            <RightHeader>
-              <p className="text-sm lg:text-md">Hi, {session.user?.name}</p>
-              <button
-                className="bg-red-800 px-4 py-1 rounded-xl text-sm cursor-pointer"
-                onClick={logoutAction}
-              >
-                x
-              </button>
-            </RightHeader>
-          </div>
+    <body>
+      <div className="flex justify-center w-full h-[vh8]">
+        <div className="flex justify-between xl:w-[40%] lg:w-[60%] w-[100%] bg-black">
+          <LeftHeader>&nbsp;</LeftHeader>
+          <RightHeader>
+            <p className="text-sm lg:text-md">Hi, {session.user?.name}</p>
+            <button
+              className="bg-red-800 px-4 py-1 rounded-xl text-sm cursor-pointer"
+              onClick={logoutAction}
+            >
+              x
+            </button>
+          </RightHeader>
         </div>
-        {children}
-      </body>
-    </html>
+      </div>
+      {children}
+    </body>
   );
 }
