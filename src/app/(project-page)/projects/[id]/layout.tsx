@@ -2,7 +2,7 @@ import AddButton from "@/components/AddButton";
 import LeftHeader from "@/components/LeftHeader";
 import ProjectTitle from "@/components/ProjectTitle";
 import RightHeader from "@/components/RightHeader";
-import { GetProjectById } from "@/db/projectRepository";
+import { getProjectById } from "@/db/projectRepository";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
@@ -38,7 +38,7 @@ export default async function Layout({ params, children }: LayoutProps) {
   if (Number.isNaN(projectId)) return <div>Invalid project id</div>;
   console.log("Project ID in layout:", projectId);
 
-  const project = await GetProjectById(Number(id));
+  const project = await getProjectById(Number(id));
   console.log("Project in layout:", project);
 
   return (

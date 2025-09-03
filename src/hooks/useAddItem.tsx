@@ -9,7 +9,7 @@ export default function useAddItem({ type }: { type: ItemType }) {
   useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        cancel();
+        cancelCreating();
         window.removeEventListener("keydown", handleEscape);
       }
     };
@@ -25,7 +25,7 @@ export default function useAddItem({ type }: { type: ItemType }) {
     setTitle(event.target.value);
   };
 
-  const cancel = () => {
+  const cancelCreating = () => {
     setIsCreating(false);
     setTitle("New " + type);
   };
@@ -35,6 +35,6 @@ export default function useAddItem({ type }: { type: ItemType }) {
     isCreating,
     createNewItem,
     handleChange,
-    cancel,
+    cancelCreating,
   };
 }

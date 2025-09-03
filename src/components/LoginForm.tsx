@@ -1,7 +1,7 @@
 "use client";
 
 import useLoginForm from "@/hooks/useLoginForm";
-import { loginAction } from "@/app/loginAction";
+import { loginAction } from "@/loginAction";
 
 type LoginFormProps = {
   onSubmit: () => void;

@@ -1,13 +1,18 @@
 "use client";
 
+import { createProjectAction } from "@/loginAction";
 import useAddItem from "@/hooks/useAddItem";
 
 export default function AddProject() {
-  const { title, isCreating, createNewItem, handleChange, cancel } = useAddItem(
-    {
+  const { title, isCreating, createNewItem, handleChange, cancelCreating } =
+    useAddItem({
       type: "Board",
-    }
-  );
+    });
+
+  const handleCreateProject = (title: string) => {
+    createProjectAction(title);
+    cancelCreating();
+  };
 
   return (
     <div className="flex justify-center items-center">
@@ -22,13 +27,13 @@ export default function AddProject() {
           <div className="flex gap-[1em]">
             <button
               className="bg-blue-600 px-2 rounded-lg cursor-pointer w-full py-1"
-              onClick={() => {}}
+              onClick={() => handleCreateProject(title)}
             >
               Add
             </button>
             <button
               className="bg-red-600 px-2 rounded-lg cursor-pointer w-full py-1"
-              onClick={cancel}
+              onClick={cancelCreating}
             >
               Cancel
             </button>
