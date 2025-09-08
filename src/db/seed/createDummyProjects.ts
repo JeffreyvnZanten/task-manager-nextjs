@@ -1,7 +1,7 @@
 import { project } from "@/db/schemas/project-schema";
 import { db } from "@/db";
 import { getUserId } from "@/db/userRepository";
-import { card } from "../schemas/card-schema";
+import { task } from "../schemas/task-schema";
 
 export function createDummyProjects() {
   createProjects("jefvnzanten@gmail.com");
@@ -64,7 +64,7 @@ async function createProjects(username: string) {
       if (projectData.cards !== null) {
         for (const cardData of projectData.cards) {
           try {
-            const cardResult = await db.insert(card).values({
+            const cardResult = await db.insert(task).values({
               title: cardData.title,
               project_id: projectId,
               status: "todo",

@@ -48,6 +48,7 @@ export async function createProject(
 }
 
 export async function deleteProject(id: number): Promise<boolean> {
+  console.log("deleteProject called with id:", id);
   try {
     const result = await db.delete(project).where(eq(project.id, id));
     return result.rowsAffected > 0;

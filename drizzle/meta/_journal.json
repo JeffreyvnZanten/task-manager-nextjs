@@ -36,6 +36,20 @@
       "when": 1756709162034,
       "tag": "0004_warm_miss_america",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1757330572882,
+      "tag": "0005_fresh_marvel_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1757340078766,
+      "tag": "0006_wonderful_yellow_claw",
+      "breakpoints": true
     }
   ]
 }

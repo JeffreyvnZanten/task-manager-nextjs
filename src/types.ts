@@ -12,3 +12,10 @@ export type Project = {
   title: string;
   user_id: string;
 };
+
+export type Task = {
+  id: number;
+  title: string;
+  project_id: number;
+  status: Status;
+};

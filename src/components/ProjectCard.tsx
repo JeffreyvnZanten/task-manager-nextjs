@@ -1,43 +1,52 @@
-import { GetAllCardsByProjectId } from "@/db/cardRepository";
-import { Project } from "@/types";
-import Link from "next/link";
-import SettingsButton from "./SettingsButton";
-import { deleteProjectAction } from "@/loginAction";
+"use client";
+
+import { Card, Project } from "@/types";
+import { useEffect, useState } from "react";
+import { getAllTasksAction } from "@/server-actions/taskActions";
+import { deleteProjectAction } from "@/server-actions/projectActions";
+import { useTransition } from "react";
+import CardUI from "./Card/CardUI";
+import CardHeader from "./Card/CardHeader";
+import useSettingsMenu from "@/hooks/useSettingsMenu";
+import CardMenu from "./Card/CardMenu";
 
 type ProjectCardProps = {
   project: Project;
 };
 
-export default async function ProjectCard({ project }: ProjectCardProps) {
-  const cardData = await GetAllCardsByProjectId(project.id);
-  console.log("Card Data for project", project.id, ":", cardData);
+export default function ProjectCard({ project }: ProjectCardProps) {
+  const [cards, setCards] = useState<Card[]>([]);
+  const [, startTransition] = useTransition();
+  const { isOpen, toggleMenu } = useSettingsMenu();
 
-  async function handleSettingsClick() {
-    "use server";
-
-    console.log("Settings clicked");
-    if (project.id !== null) {
-      deleteProjectAction(project.id);
+  useEffect(() => {
+    async function fetchCards() {
+      const fetchedCards = await getAllTasksAction(project.id);
+      setCards(fetchedCards);
     }
-  }
+    fetchCards();
+  }, []);
+
+  const handleDeleteClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log("Delete clicked for project:", project.id);
+    startTransition(async () => {
+      await deleteProjectAction(project.id);
+    });
+  };
 
   return (
-    <div
-      className="flex rounded-md min-h-[10em] 
-    xl:min-w-[10em] lg:min-w-[12em] md:min-w-[4em] sm:min-w-[5em] 
-    justify-center bg-black"
-    >
-      <div className="flex flex-row justify-between items-center w-full h-[3em]">
-        <Link
-          className="cursor-pointer w-full"
-          href={`/projects/${project.id}`}
-        >
-          <h1 className="px-[1em] text-sm xl:text-md font-semibold text-wrap">
-            {project.title} ({cardData.length})
-          </h1>
-        </Link>
-        <SettingsButton onClick={handleSettingsClick} />
+    <CardUI>
+      <CardHeader
+        title={project.title}
+        navigationLink={`/projects/${project.id}`}
+        cardCount={cards.length}
+        handleToggle={toggleMenu}
+      />
+      <div>
+        {isOpen && <CardMenu type="Project" handleClick={handleDeleteClick} />}
       </div>
-    </div>
+    </CardUI>
   );
 }

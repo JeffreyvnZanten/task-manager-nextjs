@@ -1,6 +1,7 @@
-import AddButton from "@/components/AddButton";
-import { GetAllCardsByProjectId } from "@/db/cardRepository";
+import CardView from "@/components/CardView";
+import { GetAllTasksByProjectId } from "@/db/taskRepository";
 import { auth } from "@/lib/auth";
+import { createTaskAction } from "@/server-actions/taskActions";
 import { headers } from "next/headers";
 
 type PageProps = {
@@ -9,7 +10,7 @@ type PageProps = {
   };
 };
 
-export default async function Page({ params }: PageProps) {
+async function Page({ params }: PageProps) {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -19,7 +20,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   const { id } = params;
-  const cards = await GetAllCardsByProjectId(Number(id));
+  const cards = await GetAllTasksByProjectId(Number(id));
   console.log("Cards for project", id, ":", cards);
 
   const createCard = async () => {
@@ -29,19 +30,12 @@ export default async function Page({ params }: PageProps) {
   };
 
   return (
-    <main className="flex justify-center py-[4em]">
-      <div
-        className="w-[80%] xl:w-[40%] lg:w-[60%] md:w-[80%]
-        grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
-        gap-[1em] 2xl:gap-[2em] xl:gap-[2em] lg:gap-[2em] md:gap-[2em] items-center"
-      >
-        <AddButton type="Card" handleOnClick={createCard} />
-        {cards.map((card) => (
-          <div className="border bg-gray-800 w-[10em] p-4" key={card.id}>
-            <h2>{card.title}</h2>
-          </div>
-        ))}
-      </div>
-    </main>
+    <CardView
+      cards={cards}
+      projectId={Number(id)}
+      createTask={createTaskAction}
+    />
   );
 }
+
+export default Page;

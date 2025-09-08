@@ -1,28 +1,29 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useTransition } from "react";
+import { useState } from "react";
 
-type Props = { onClick: () => Promise<void> | void };
+type SettingsButtonProps = {
+  toggleSettingsMenu: () => void;
+};
 
-export default function SettingsButton({ onClick }: Props) {
-  const router = useRouter();
-  const [, startTransition] = useTransition();
+export default function SettingsButton({
+  toggleSettingsMenu,
+}: SettingsButtonProps) {
+  const [isActive, setIsActive] = useState(false);
 
   const handleClick = (e: React.MouseEvent<HTMLImageElement>) => {
-    e.preventDefault(); // Link blokkeren
-    e.stopPropagation(); // bubbling stoppen
-    startTransition(async () => {
-      await onClick(); // server action
-      router.refresh(); // data opnieuw ophalen
-    });
+    setIsActive(!isActive);
+    toggleSettingsMenu();
   };
 
   return (
     <img
       onClick={handleClick}
       src="/setting-icon.svg"
-      className="w-[2em] h-[2em] cursor-pointer"
+      className={`w-[2em] h-[2em] cursor-pointer opacity-100 hover:opacity-70 ${
+        isActive ? "brightness-250 opacity-100" : "brightness-70 opacity-50"
+      }`}
+      alt="Settings Icon"
     />
   );
 }

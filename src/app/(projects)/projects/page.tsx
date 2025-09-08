@@ -1,10 +1,10 @@
-import AddButton from "@/components/AddButton";
-import AddProject from "@/components/AddProject";
+import AddItem from "@/components/AddItem";
 import ProjectCard from "@/components/ProjectCard";
 import { getAllProjectsForUser } from "@/db/projectRepository";
 import { getUserId } from "@/db/userRepository";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
+import { createProjectAction } from "@/server-actions/projectActions";
 
 export const dynamic = "force-dynamic";
 
@@ -18,12 +18,6 @@ export default async function Home() {
   }
   const userId = await getUserId(session.user?.email!);
   const projects = await getAllProjectsForUser(userId);
-
-  const createProject = async () => {
-    "use server";
-
-    console.log("Create project");
-  };
 
   if (!projects)
     return (
@@ -39,7 +33,7 @@ export default async function Home() {
         grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4
         gap-[1em] 2xl:gap-[2em] xl:gap-[2em] lg:gap-[2em] md:gap-[2em] items-center"
         >
-          <AddProject />
+          <AddItem type="Board" createItem={createProjectAction} />
           {projects.map((project) => (
             <ProjectCard key={project.id} project={project} />
           ))}
