@@ -1,5 +1,9 @@
-<img src="screenshots/Screenshot 2025-09-09 090451.png" width="800" />
-<img src="screenshots/Screenshot 2025-09-09 090534.png" width="800" />
+<div classname="display: flex; flex-direction: row gap-4">
+  <img src="screenshots/Screenshot 2025-09-09 090451.png" width="400" />
+  <img src="screenshots/Screenshot 2025-09-09 090534.png" width="400" />
+  <img src="screenshots/Screenshot 2025-09-09 091008.png" width="400" />
+  <img src="screenshots/Screenshot 2025-09-09 091021.png" width="400" />
+</div>
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
