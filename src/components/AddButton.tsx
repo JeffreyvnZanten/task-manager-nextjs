@@ -34,7 +34,7 @@ export default function AddButton({ type, handleOnClick }: AddButtonProps) {
         <p>{newProject}...</p>
       ) : (
         <button
-          className="bg-blue-400 px-2 rounded-2xl cursor-pointer w-[4em] h-[4em]"
+          className="bg-blue-400 px-2 rounded-2xl cursor-pointer w-[2em] h-[2em]"
           onClick={createNewProject}
         >
           +

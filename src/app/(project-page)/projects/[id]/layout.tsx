@@ -1,7 +1,7 @@
-import AddButton from "@/components/AddButton";
 import LeftHeader from "@/components/LeftHeader";
 import ProjectTitle from "@/components/ProjectTitle";
 import RightHeader from "@/components/RightHeader";
+import ViewToggler from "@/components/ViewToggler/ViewToggler";
 import { getProjectById } from "@/db/projectRepository";
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
@@ -49,7 +49,8 @@ export default async function Layout({ params, children }: LayoutProps) {
             {project && <ProjectTitle title={project.title} />}
           </LeftHeader>
           <RightHeader>
-            <p className="text-sm lg:text-md">Hi, {session.user?.name}</p>
+            <ViewToggler />
+            {/* <p className="text-sm lg:text-md">Hi, {session.user?.name}</p> */}
             <button
               className="bg-red-800 px-4 py-1 rounded-xl text-sm cursor-pointer"
               onClick={logoutAction}

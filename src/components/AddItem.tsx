@@ -19,12 +19,12 @@ function AddItem({ type, createItem }: AddItemProps) {
   return (
     <div className="flex justify-center items-center">
       {isCreating ? (
-        <div className="flex flex-col gap-[1em] bg-black p-[2em] rounded-md">
+        <div className="flex flex-col gap-[1em] bg-black p-[1em] rounded-md w-full">
           <input
             type="text"
             value={title}
             onChange={handleChange}
-            className="bg-gray-800 text-white p-2 rounded-md"
+            className="bg-gray-800 text-white p-2 text-sm rounded-md"
           />
           <div className="flex gap-[1em]">
             <button
@@ -43,7 +43,7 @@ function AddItem({ type, createItem }: AddItemProps) {
         </div>
       ) : (
         <button
-          className="bg-blue-400 px-2 rounded-2xl cursor-pointer w-[4em] h-[4em]"
+          className="bg-blue-400 px-2 rounded-2xl cursor-pointer w-[3em] h-[3em]"
           onClick={createNewItem}
         >
           +
